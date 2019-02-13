@@ -1,0 +1,9 @@
+venv
+.vscode/
+/node_modules/
+/__pycache__/
+db.sqlite3
+*.pyc
+*.log
+sv/static/
+sv/templates/
