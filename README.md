@@ -19,6 +19,7 @@ python -m venv venv
 
 ## 2回目以降
 ```
+cd {PROJECT_ROOT}
 .\venv\Scripts\activate # or /venv/Scripts/activate
 (venv) cd sv
 (venv) python manage.py runserver
