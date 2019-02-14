@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions, parsers
 
-from .sample import iris_dataset, estimate
+from .sample import iris_dataset, predictByDecisionTree, predictByLogisticRegression
 from .sample_data import dataset
 
 # dataset = iris_dataset
@@ -29,9 +29,15 @@ class TrainingSetView(APIView):
         }
         return Response(data)
 
-class FitAndTransformView(APIView):
+class PredictByDecisionTreeView(APIView):
     parser_classes = (parsers.JSONParser,)
 
     def post(self, req):
-        pred_result = estimate(req.data["trainingSet"], [req.data["labels"]])[0]
+        pred_result = predictByDecisionTree(req.data["trainingSet"], [req.data["labels"]])[0]
         return Response(pred_result)
+
+class PredictByLogisticRegressionView(APIView):
+    parser_classes = (parsers.JSONParser,)
+
+    def post(self, req):
+        return  Response(predictByLogisticRegression(req.data["trainingSet"], [req.data["labels"]])[0])

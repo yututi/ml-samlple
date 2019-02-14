@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 
-from sample.views import index, TrainingSetView, FitAndTransformView
+from sample.views import index, TrainingSetView, PredictByDecisionTreeView, PredictByLogisticRegressionView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('sample1/', index, name="index"),
-    url(r'^sample1/api/trainingSet', TrainingSetView.as_view()),
-    url(r'^sample1/api/estimate', FitAndTransformView.as_view())
+    url(r'^sample/api/trainingSet', TrainingSetView.as_view()),
+    url(r'^sample/api/predict/decisionTree', PredictByDecisionTreeView.as_view()),
+    url(r'^sample/api/predict/logisticRegression', PredictByLogisticRegressionView.as_view()),
+    url('sample/.*$', index, name="index"),
 ]

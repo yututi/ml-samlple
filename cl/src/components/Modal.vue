@@ -2,10 +2,17 @@
   <div v-if="isShown" class="modal is-active" @click="isShown = false">
     <div class="modal-background"></div>
     <div class="modal-content">
-      <div class="modal-card">
-        <section class="modal-card-body" stype="height:50%;">
-          予測した結果は
-          <strong>{{estimatedValue}}</strong>です。
+      <div class="modal-card" style="width:300px;">
+        <section
+          class="modal-card-body"
+          style="height:50%;"
+        >予測した結果は
+          <br>
+          <strong v-for="estimatedValue in estimatedValues" :key="estimatedValue">
+            {{estimatedValue}}
+            <br>
+          </strong>
+          です。
         </section>
       </div>
     </div>
@@ -19,7 +26,7 @@ export default {
     return {
       isShown: false,
       labels: [],
-      estimatedValue: ""
+      estimatedValues: []
     };
   },
   computed: {
@@ -28,8 +35,8 @@ export default {
     }
   },
   methods: {
-    show: function(estimatedValue, labels) {
-      this.estimatedValue = estimatedValue;
+    show: function(estimatedValues, labels) {
+      this.estimatedValues = estimatedValues;
       this.labels = labels;
       this.isShown = true;
     }
