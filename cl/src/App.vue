@@ -1,59 +1,61 @@
 <template>
-  <div id="app" class="container is-fluid">
-    <div v-if="isLoading" class="loadingLayer">
-      <div class="is-loading"/>
-    </div>
-    <div class="fill">
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">計測データ</label>
-        </div>
-        <div class="field-body">
-          <div
-            class="field"
-            v-for="(featureName, index) in featureNameList"
-            :key="featureName+'label'"
-          >
-            <p class="control is-expanded">
-              <input
-                type="number"
-                :placeholder="featureName"
-                @input="setLavelVal(index, $event)"
-                step="0.1"
-                class="input"
-              >
-            </p>
-          </div>
-          <div class="field">
-            <a class="button is-primary" @click="estimate">予測</a>
-          </div>
-        </div>
+  <div id="app" class="section">
+    <div class="container is-fluid fill">
+      <div v-if="isLoading" class="loadingLayer">
+        <div class="is-loading"/>
       </div>
-      <div class="field is-horizontal flex">
-        <div class="field-label is-normal">
-          <label class="label">学習データ</label>
+      <div class="fill df">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">計測データ</label>
+          </div>
+          <div class="field-body">
+            <div
+              class="field"
+              v-for="(featureName, index) in featureNameList"
+              :key="featureName+'label'"
+            >
+              <p class="control is-expanded">
+                <input
+                  type="number"
+                  :placeholder="featureName"
+                  @input="setLavelVal(index, $event)"
+                  step="0.1"
+                  class="input"
+                >
+              </p>
+            </div>
+            <div class="field">
+              <a class="button is-primary" @click="estimate">予測</a>
+            </div>
+          </div>
         </div>
-        <div class="field-body">
-          <table class="table is-bordered">
-            <thead>
-              <th v-for="featureName in featureNameList" :key="featureName">
-                <abbr>{{featureName}}</abbr>
-              </th>
-              <th>
-                <abbr>target</abbr>
-              </th>
-            </thead>
-            <tbody style="overflow-y: scroll;">
-              <tr v-for="(training, index) in trainingList" :key="index">
-                <td
-                  v-for="(featureName, featureIndex) in featureNameList"
-                  :key="index+featureName"
-                  @click="training.splice(featureIndex, 1, null)"
-                >{{orDefault(training[featureIndex],"--")}}</td>
-                <td>{{targetNameList[targetList[index]]}}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="field is-horizontal flex">
+          <div class="field-label is-normal">
+            <label class="label">学習データ</label>
+          </div>
+          <div class="field-body fill">
+            <table class="table is-bordered fill" style="overflow-y: scroll;display:block;">
+              <thead>
+                <th v-for="featureName in featureNameList" :key="featureName">
+                  <abbr>{{featureName}}</abbr>
+                </th>
+                <th>
+                  <abbr>target</abbr>
+                </th>
+              </thead>
+              <tbody>
+                <tr v-for="(training, index) in trainingList" :key="index">
+                  <td
+                    v-for="(featureName, featureIndex) in featureNameList"
+                    :key="index+featureName"
+                    @click="training.splice(featureIndex, 1, null)"
+                  >{{orDefault(training[featureIndex],"--")}}</td>
+                  <td>{{targetNameList[targetList[index]]}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -86,12 +88,12 @@ export default {
       }
       return val;
     },
-    setLavelVal:function(index, event){
-        if(event.target.value){
-            this.labelList.splice(index, 1, event.target.value)
-        }else{
-            this.labelList.splice(index, 1, null)
-        }
+    setLavelVal: function(index, event) {
+      if (event.target.value) {
+        this.labelList.splice(index, 1, event.target.value);
+      } else {
+        this.labelList.splice(index, 1, null);
+      }
     },
     estimate: function() {
       this.isLoading = true;
@@ -99,8 +101,8 @@ export default {
       axios
         .post("api/estimate", {
           trainingSet: {
-              data:instance.trainingList,
-              target:instance.targetList
+            data: instance.trainingList,
+            target: instance.targetList
           },
           labels: instance.labelList
         })
@@ -140,13 +142,11 @@ export default {
 </script>
 
 <style lang="scss">
+html,
+body,
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  height: 100%;
+  width: 100%;
 }
 .df {
   display: flex;
@@ -160,7 +160,7 @@ export default {
 }
 .fill {
   height: 100%;
-  width: 100%;
+  //   width: 100%;
 }
 
 .loadingLayer {

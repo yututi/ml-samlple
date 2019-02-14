@@ -10,6 +10,9 @@ from rest_framework.response import Response
 from rest_framework import authentication, permissions, parsers
 
 from .sample import iris_dataset, estimate
+from .sample_data import dataset
+
+# dataset = iris_dataset
 
 def index(req):
     return render(req, "index.html")
@@ -19,10 +22,10 @@ class TrainingSetView(APIView):
 
     def get(self, req):
         data = {
-            "head":iris_dataset["feature_names"],
-            "data":iris_dataset["data"],
-            "target":iris_dataset["target"],
-            "targetNames":iris_dataset["target_names"]
+            "head":dataset["feature_names"],
+            "data":dataset["data"],
+            "target":dataset["target"],
+            "targetNames":dataset["target_names"]
         }
         return Response(data)
 

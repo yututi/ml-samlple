@@ -13,4 +13,6 @@ def estimate(training_set, label):
 
     classier.fit(imputed_data, training_set["target"])
     predicated = classier.predict(imputed_label)
+    # print(classier.apply(imputed_label))
+    # print(classier.tree_.__getstate__())
     return predicated
