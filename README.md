@@ -7,7 +7,7 @@
 ## クライアント側ビルド
 ```
 cd {PROJECT_ROOT}/cl
-npm install
+npm install --save
 npm run build
 ```
 
