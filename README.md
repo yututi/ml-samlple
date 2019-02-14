@@ -1,5 +1,9 @@
 # 機械学習サンプル
 
+## 必要なもの
+- Python3
+- node.js
+
 ## クライアント側ビルド
 ```
 cd {PROJECT_ROOT}/cl
