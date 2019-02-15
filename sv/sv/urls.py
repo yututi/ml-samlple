@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
+from django.views.generic.base import RedirectView
 
 from sample.views import index, TrainingSetView, PredictByDecisionTreeView, PredictByLogisticRegressionView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r"^$", RedirectView.as_view(url="/sample")),
     url(r'^sample/api/trainingSet', TrainingSetView.as_view()),
     url(r'^sample/api/predict/decisionTree', PredictByDecisionTreeView.as_view()),
     url(r'^sample/api/predict/logisticRegression', PredictByLogisticRegressionView.as_view()),
