@@ -26,6 +26,9 @@ body,
   //   width: 100%;
 }
 
+$spinnerSize: 5em;
+$spinnerColor: white;
+
 .loadingLayer {
   position: fixed;
   z-index: 100;
@@ -34,19 +37,15 @@ body,
   width: 100vw;
   left: 0;
   top: 0;
+  background-color: dimgray;
 }
-$spinnerSize: 5em;
-$spinnerColor: white;
-$spinnerBGC: dimgray;
-
 .is-loading {
   height: 100%;
   width: 100%;
   position: relative;
-  background-color: $spinnerBGC;
   &:after {
     content: " ";
-    opacity: 0;
+    opacity: 1;
     position: absolute;
     border-top: 2px solid transparent;
     border-left: 2px solid transparent;

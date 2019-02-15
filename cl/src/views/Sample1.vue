@@ -3,7 +3,7 @@
     <div v-if="isLoading" class="loadingLayer">
       <div class="is-loading"/>
     </div>
-    <div class="fill df">
+    <div v-else class="fill df">
       <div class="box">
         <div class="field is-horizontal">
           <div class="field-label is-normal" >
